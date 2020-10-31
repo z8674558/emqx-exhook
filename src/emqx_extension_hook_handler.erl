@@ -42,6 +42,9 @@
         , on_session_terminated/3
         ]).
 
+-export([ on_message_publish/1
+]).
+
 %% Utils
 -export([ message/1
         , validator/1
@@ -70,6 +73,7 @@
          , {'session.discarded',   {?MODULE, on_session_discarded,    []}}
          , {'session.takeovered',  {?MODULE, on_session_takeovered,   []}}
          , {'session.terminated',  {?MODULE, on_session_terminated,   []}}
+         , {'message.publish',  {?MODULE, on_message_publish,   []}}
          ]).
 
 %%--------------------------------------------------------------------
@@ -143,7 +147,15 @@ on_session_terminated(ClientInfo, Reason, _SessInfo) ->
     cast('session_terminated', [clientinfo(ClientInfo), stringfy(Reason)]).
 
 %%--------------------------------------------------------------------
+%% Messages
+%%--------------------------------------------------------------------
+
+on_message_publish(Message) ->
+    cast('message_publish', [message(Message)]).
+
+%%--------------------------------------------------------------------
 %% Types
+%%--------------------------------------------------------------------
 
 props(undefined) -> [];
 props(M) when is_map(M) -> maps:to_list(M).
