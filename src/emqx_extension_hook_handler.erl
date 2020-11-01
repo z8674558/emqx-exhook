@@ -76,10 +76,10 @@
          , {'session.discarded',   {?MODULE, on_session_discarded,    []}}
          , {'session.takeovered',  {?MODULE, on_session_takeovered,   []}}
          , {'session.terminated',  {?MODULE, on_session_terminated,   []}}
-         , {'message.publish',  {?MODULE, on_message_publish,   []}}
-         , {'message.dropped',  {?MODULE, on_message_dropped,   []}}
-         , {'message.delivered',  {?MODULE, on_message_delivered,   []}}
-         , {'message.acked',  {?MODULE, on_message_acked,   []}}
+         , {'message.publish',     {?MODULE, on_message_publish,      []}}
+         , {'message.dropped',     {?MODULE, on_message_dropped,      []}}
+         , {'message.delivered',   {?MODULE, on_message_delivered,    []}}
+         , {'message.acked',       {?MODULE, on_message_acked,        []}}
 ]).
 
 %%--------------------------------------------------------------------
@@ -160,6 +160,7 @@ on_message_publish(Message) ->
     cast('message_publish', [message(Message)]).
 
 on_message_dropped(Message, Reason) ->
+    io:format("on_message_dropped: ~p~n", [Reason]),
     cast('message_dropped', [message(Message), stringfy(Reason)]).
 
 on_message_delivered(ClientInfo, Message) ->
