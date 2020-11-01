@@ -154,7 +154,6 @@ on_session_terminated(ClientInfo, Reason, _SessInfo) ->
 
 %%--------------------------------------------------------------------
 %% Messages
-%%--------------------------------------------------------------------
 
 on_message_publish(Message) ->
     cast('message_publish', [message(Message)]).
@@ -170,7 +169,6 @@ on_message_acked(ClientInfo, Message) ->
 
 %%--------------------------------------------------------------------
 %% Types
-%%--------------------------------------------------------------------
 
 props(undefined) -> [];
 props(M) when is_map(M) -> maps:to_list(M).

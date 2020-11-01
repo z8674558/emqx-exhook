@@ -31,10 +31,10 @@ def init():
                 ("session_discarded",   "main", "on_session_discarded", []),
                 ("session_takeovered",  "main", "on_session_takeovered", []),
                 ("session_terminated",  "main", "on_session_terminated", []),
-                ("message_publish",     "main", "on_message_publish", []),
-                ("message_delivered",   "main", "on_message_delivered", []),
-                ("message_acked",       "main", "on_message_acked", []),
-                ("message_dropped",     "main", "on_message_dropped", [])
+                ("message_publish",     "main", "on_message_publish", [("topics", ["t/#"])]),
+                ("message_delivered",   "main", "on_message_delivered", [("topics", ["t/#"])]),
+                ("message_acked",       "main", "on_message_acked", [("topics", ["t/#"])]),
+                ("message_dropped",     "main", "on_message_dropped", [("topics", ["t/#"])])
                 ]
     return (OK, (hookspec, state))
 
