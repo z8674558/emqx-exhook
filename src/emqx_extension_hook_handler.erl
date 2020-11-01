@@ -159,8 +159,8 @@ on_session_terminated(ClientInfo, Reason, _SessInfo) ->
 on_message_publish(Message) ->
     cast('message_publish', [message(Message)]).
 
-on_message_dropped(Message, _By, Reason) ->
-    cast('message_dropped', [message(Message), stringfy(Reason)]).
+on_message_dropped(Message, By, Reason) ->
+    cast('message_dropped', [message(Message), props(By), stringfy(Reason)]).
 
 on_message_delivered(ClientInfo, Message) ->
     cast('message_delivered', [clientinfo(ClientInfo), message(Message)]).

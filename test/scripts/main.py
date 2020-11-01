@@ -125,7 +125,8 @@ def on_message_publish(message, state):
         print("on_message_publish: message: {0}, state: {1}".format(message, state))
         return (OK, message)
 
-def on_message_dropped(message, reason, state):
+def on_message_dropped(message, by, reason, state):
+    print(by)
     topic = list(filter(lambda x: x[0] == b'topic', message))[0][1]
     if topic[0:4] == b'$SYS':
         return
