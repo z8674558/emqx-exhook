@@ -31,10 +31,10 @@ def init():
                 ("session_discarded",   "main", "on_session_discarded", []),
                 ("session_takeovered",  "main", "on_session_takeovered", []),
                 ("session_terminated",  "main", "on_session_terminated", []),
-                ("message_publish",     "main", "on_message_publish", [("topics", ["t/#"])]),
-                ("message_delivered",   "main", "on_message_delivered", [("topics", ["t/#"])]),
-                ("message_acked",       "main", "on_message_acked", [("topics", ["t/#"])]),
-                ("message_dropped",     "main", "on_message_dropped", [("topics", ["t/#"])])
+                ("message_publish",     "main", "on_message_publish", []),
+                ("message_delivered",   "main", "on_message_delivered", []),
+                ("message_acked",       "main", "on_message_acked", []),
+                ("message_dropped",     "main", "on_message_dropped", [])
                 ]
     return (OK, (hookspec, state))
 
@@ -125,8 +125,7 @@ def on_message_publish(message, state):
         print("on_message_publish: message: {0}, state: {1}".format(message, state))
         return (OK, message)
 
-def on_message_dropped(message, by, reason, state):
-    print(by)
+def on_message_dropped(message, _by, reason, state):
     topic = list(filter(lambda x: x[0] == b'topic', message))[0][1]
     if topic[0:4] == b'$SYS':
         return
