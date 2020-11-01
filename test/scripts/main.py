@@ -35,7 +35,7 @@ def init():
                 ("message_delivered",   "main", "on_message_delivered", [("topics", ["t/#"])]),
                 ("message_acked",       "main", "on_message_acked", [("topics", ["t/#"])]),
                 ("message_dropped",     "main", "on_message_dropped", [("topics", ["t/#"])])
-                ]
+               ]
     return (OK, (hookspec, state))
 
 def deinit():
