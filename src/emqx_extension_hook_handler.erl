@@ -159,9 +159,8 @@ on_session_terminated(ClientInfo, Reason, _SessInfo) ->
 on_message_publish(Message) ->
     cast('message_publish', [message(Message)]).
 
-on_message_dropped(Message, Reason) ->
-    io:format("on_message_dropped: ~p~n", [Reason]),
-    cast('message_dropped', [message(Message), stringfy(Reason)]).
+on_message_dropped(Reason) ->
+    cast('message_dropped', [stringfy(Reason)]).
 
 on_message_delivered(ClientInfo, Message) ->
     cast('message_delivered', [clientinfo(ClientInfo), message(Message)]).
